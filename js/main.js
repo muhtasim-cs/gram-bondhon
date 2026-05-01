@@ -4,7 +4,7 @@
 
 'use strict';
 
-/* ------ Hero Slider ------ */
+/* ------ Hero Slider with Ken Burns ------ */
 (function initHeroSlider() {
   const slides = document.querySelectorAll('.hero-slide');
   const dotsContainer = document.getElementById('heroDots');
@@ -20,10 +20,18 @@
     dotsContainer.appendChild(dot);
   });
 
+  function restartAnimation(slide) {
+    // Force CSS animation restart
+    slide.style.animation = 'none';
+    void slide.offsetWidth; // reflow
+    slide.style.animation = '';
+  }
+
   function goTo(index) {
     slides[current].classList.remove('active');
     dotsContainer.children[current].classList.remove('active');
     current = index;
+    restartAnimation(slides[current]);
     slides[current].classList.add('active');
     dotsContainer.children[current].classList.add('active');
   }
@@ -33,7 +41,7 @@
   }
 
   function startTimer() {
-    timer = setInterval(next, 5000);
+    timer = setInterval(next, 7000);
   }
 
   startTimer();

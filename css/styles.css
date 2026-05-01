@@ -284,6 +284,49 @@ ul { list-style: none; }
 
 .hero-slide.active { opacity: 1; }
 
+/* Ken Burns motion effects */
+.hero-slide.kb-zoom-in {
+  animation: none;
+}
+.hero-slide.kb-zoom-in.active {
+  animation: kbZoomIn 7s ease-out forwards;
+}
+.hero-slide.kb-zoom-out {
+  animation: none;
+}
+.hero-slide.kb-zoom-out.active {
+  animation: kbZoomOut 7s ease-out forwards;
+}
+.hero-slide.kb-pan-right {
+  animation: none;
+}
+.hero-slide.kb-pan-right.active {
+  animation: kbPanRight 7s ease-out forwards;
+}
+.hero-slide.kb-pan-left {
+  animation: none;
+}
+.hero-slide.kb-pan-left.active {
+  animation: kbPanLeft 7s ease-out forwards;
+}
+
+@keyframes kbZoomIn {
+  from { transform: scale(1.0); }
+  to   { transform: scale(1.12); }
+}
+@keyframes kbZoomOut {
+  from { transform: scale(1.12); }
+  to   { transform: scale(1.0); }
+}
+@keyframes kbPanRight {
+  from { transform: scale(1.08) translateX(-3%); }
+  to   { transform: scale(1.08) translateX(3%); }
+}
+@keyframes kbPanLeft {
+  from { transform: scale(1.08) translateX(3%); }
+  to   { transform: scale(1.08) translateX(-3%); }
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;

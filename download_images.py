@@ -20,6 +20,8 @@ IMAGES = {
     "hero1.jpg":      "https://source.unsplash.com/1920x1080/?farmer,hands,grains",
     "hero2.jpg":      "https://source.unsplash.com/1920x1080/?rice,field,bangladesh",
     "hero3.jpg":      "https://source.unsplash.com/1920x1080/?rural,village,harvest",
+    "hero4.jpg":      "https://source.unsplash.com/1920x1080/?agritech,handshake,farm,technology",
+    "hero5.jpg":      "https://source.unsplash.com/1920x1080/?nakshi,textile,embroidery,craft",
 
     # Halal section
     "farmer-rice.jpg": "https://source.unsplash.com/800x600/?farmer,rice,planting",
