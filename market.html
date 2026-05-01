@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Market Analysis | Gram-Bondhon</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <style>
+    /* ── Market Analysis Page Styles ── */
+    .market-main {
+      background: linear-gradient(180deg, #f0f7f4 0%, #ffffff 40%);
+      min-height: 100vh;
+      padding-bottom: 5rem;
+    }
+
+    .market-hero {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+      padding: 3rem 0 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .market-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .market-hero-inner { position: relative; z-index: 1; }
+    .market-hero h1 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: .5rem; }
+    .market-hero p { color: rgba(255,255,255,.82); font-size: 1rem; }
+    .market-hero-chips { display: flex; justify-content: center; gap: .75rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .market-chip {
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: rgba(255,255,255,.15); backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.25); border-radius: 20px;
+      padding: .3rem .85rem; color: #fff; font-size: .8rem; font-weight: 500;
+    }
+    .market-chip .material-icons { font-size: .95rem; }
+
+    /* ── Shell ── */
+    .market-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 0;
+    }
+
+    /* ── AI Status Banner ── */
+    .ai-banner {
+      display: flex; align-items: center; gap: 1rem;
+      background: linear-gradient(90deg, #e8f4f0, #f0f9f5);
+      border: 1px solid #b8ddd2; border-radius: var(--radius-md);
+      padding: 1rem 1.5rem; margin-bottom: 2rem;
+    }
+    .ai-banner-icon {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--green); display: grid; place-items: center; flex-shrink: 0;
+    }
+    .ai-banner-icon .material-icons { color: #fff; font-size: 1.3rem; }
+    .ai-banner-text h3 { font-size: .95rem; font-weight: 700; color: var(--green-dark); }
+    .ai-banner-text p { font-size: .82rem; color: var(--text-gray); margin-top: .15rem; }
+    .ai-pulse {
+      margin-left: auto; display: flex; align-items: center; gap: .4rem;
+      font-size: .8rem; color: var(--green); font-weight: 600;
+    }
+    .ai-pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
+      animation: pulseDot 1.6s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: .6; }
+    }
+
+    /* ── Controls ── */
+    .market-controls {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .market-controls label { font-size: .85rem; font-weight: 600; color: var(--text-mid); }
+    .market-select {
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      padding: .45rem .9rem; font-size: .85rem; font-family: inherit;
+      color: var(--text-dark); background: #fff; cursor: pointer;
+    }
+    .market-select:focus { outline: 2px solid var(--green); }
+    .btn-run-ai {
+      margin-left: auto; display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--green); color: #fff; border: none; border-radius: var(--radius-sm);
+      padding: .55rem 1.3rem; font-size: .88rem; font-weight: 600;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-run-ai:hover { background: var(--green-dark); }
+    .btn-run-ai .material-icons { font-size: 1.1rem; }
+
+    /* ── Stats Row ── */
+    .market-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    @media(max-width:900px){ .market-stats { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:500px){ .market-stats { grid-template-columns: 1fr; } }
+
+    .mstat {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 1.25rem 1.4rem; position: relative; overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .mstat::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--green);
+    }
+    .mstat.up::before { background: #22c55e; }
+    .mstat.down::before { background: #ef4444; }
+    .mstat.warn::before { background: #f59e0b; }
+    .mstat h4 { font-size: .78rem; font-weight: 600; color: var(--text-gray); text-transform: uppercase; letter-spacing: .05em; }
+    .mstat-val { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin: .3rem 0 .2rem; }
+    .mstat-badge {
+      display: inline-flex; align-items: center; gap: .2rem;
+      font-size: .75rem; font-weight: 600; padding: .1rem .5rem;
+      border-radius: 20px;
+    }
+    .mstat-badge.up { background: #dcfce7; color: #15803d; }
+    .mstat-badge.down { background: #fee2e2; color: #dc2626; }
+    .mstat-badge.neutral { background: #fef9c3; color: #854d0e; }
+    .mstat-badge .material-icons { font-size: .85rem; }
+
+    /* ── Main Grid ── */
+    .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    @media(max-width:900px){ .market-grid { grid-template-columns: 1fr; } }
+    .market-grid-3 { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    @media(max-width:900px){ .market-grid-3 { grid-template-columns: 1fr; } }
+
+    /* ── Cards ── */
+    .mc {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 1.5rem; box-shadow: var(--shadow-sm);
+    }
+    .mc-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem; }
+    .mc-head h2 { font-size: 1rem; font-weight: 700; color: var(--text-dark); }
+    .mc-head p { font-size: .78rem; color: var(--text-gray); margin-top: .15rem; }
+    .mc-badge {
+      display: inline-flex; align-items: center; gap: .25rem;
+      background: var(--green-light); color: var(--green); border-radius: 20px;
+      padding: .2rem .7rem; font-size: .75rem; font-weight: 600; flex-shrink: 0;
+    }
+    .mc-badge .material-icons { font-size: .9rem; }
+
+    .chart-wrap { position: relative; height: 240px; }
+    .chart-wrap-lg { position: relative; height: 300px; }
+
+    /* ── AI Decision Panel ── */
+    .ai-decision-panel { display: flex; flex-direction: column; gap: 1rem; }
+    .ai-rec {
+      border-radius: var(--radius-sm); padding: 1rem 1.1rem;
+      border-left: 4px solid transparent; position: relative;
+    }
+    .ai-rec.buy { background: #f0fdf4; border-color: #22c55e; }
+    .ai-rec.hold { background: #fffbeb; border-color: #f59e0b; }
+    .ai-rec.sell { background: #fef2f2; border-color: #ef4444; }
+    .ai-rec-head { display: flex; align-items: center; gap: .5rem; margin-bottom: .35rem; }
+    .ai-rec-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      padding: .15rem .55rem; border-radius: 4px;
+    }
+    .ai-rec.buy .ai-rec-label { background: #22c55e; color: #fff; }
+    .ai-rec.hold .ai-rec-label { background: #f59e0b; color: #fff; }
+    .ai-rec.sell .ai-rec-label { background: #ef4444; color: #fff; }
+    .ai-rec h3 { font-size: .9rem; font-weight: 700; }
+    .ai-rec p { font-size: .8rem; color: var(--text-mid); line-height: 1.5; }
+    .ai-conf { margin-top: .5rem; }
+    .ai-conf-label { font-size: .72rem; color: var(--text-gray); font-weight: 600; margin-bottom: .25rem; }
+    .ai-conf-bar { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .ai-conf-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+    .ai-rec.buy .ai-conf-fill { background: #22c55e; }
+    .ai-rec.hold .ai-conf-fill { background: #f59e0b; }
+    .ai-rec.sell .ai-conf-fill { background: #ef4444; }
+
+    /* ── Forecast Table ── */
+    .forecast-table { width: 100%; border-collapse: collapse; font-size: .83rem; margin-top: .5rem; }
+    .forecast-table th {
+      text-align: left; padding: .5rem .75rem; background: #f9fafb;
+      font-weight: 600; color: var(--text-gray); font-size: .75rem;
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .forecast-table td { padding: .6rem .75rem; border-top: 1px solid var(--border); color: var(--text-dark); }
+    .forecast-table tr:hover td { background: #f9fafb; }
+    .ft-up { color: #15803d; font-weight: 600; }
+    .ft-down { color: #dc2626; font-weight: 600; }
+    .ft-neutral { color: #92400e; font-weight: 600; }
+
+    /* ── Risk Meter ── */
+    .risk-items { display: flex; flex-direction: column; gap: .8rem; margin-top: .5rem; }
+    .risk-item h4 { font-size: .83rem; font-weight: 600; color: var(--text-dark); margin-bottom: .3rem; }
+    .risk-bar-wrap { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .risk-bar-fill { height: 100%; border-radius: 4px; }
+    .risk-low .risk-bar-fill { background: #22c55e; }
+    .risk-mid .risk-bar-fill { background: #f59e0b; }
+    .risk-high .risk-bar-fill { background: #ef4444; }
+    .risk-meta { display: flex; justify-content: space-between; font-size: .72rem; color: var(--text-gray); margin-top: .25rem; }
+
+    /* ── Seasonality ── */
+    .season-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; margin-top: .75rem; }
+    .season-cell {
+      border-radius: var(--radius-sm); padding: .75rem .6rem;
+      text-align: center; border: 1px solid var(--border);
+    }
+    .season-cell.hot { background: #fef3c7; border-color: #fcd34d; }
+    .season-cell.warm { background: #dcfce7; border-color: #86efac; }
+    .season-cell.cool { background: #eff6ff; border-color: #93c5fd; }
+    .season-cell.cold { background: #f1f5f9; border-color: #cbd5e1; }
+    .season-cell .material-icons { font-size: 1.4rem; display: block; margin-bottom: .3rem; }
+    .season-cell.hot .material-icons { color: #f59e0b; }
+    .season-cell.warm .material-icons { color: #22c55e; }
+    .season-cell.cool .material-icons { color: #3b82f6; }
+    .season-cell.cold .material-icons { color: #64748b; }
+    .season-cell h4 { font-size: .72rem; font-weight: 700; color: var(--text-dark); }
+    .season-cell p { font-size: .68rem; color: var(--text-gray); margin-top: .1rem; }
+
+    /* ── ML Model Info ── */
+    .ml-info { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: .5rem; }
+    .ml-info-item {
+      background: #f9fafb; border-radius: var(--radius-sm);
+      padding: .75rem 1rem; border: 1px solid var(--border);
+    }
+    .ml-info-item h4 { font-size: .72rem; font-weight: 600; color: var(--text-gray); text-transform: uppercase; letter-spacing: .04em; margin-bottom: .25rem; }
+    .ml-info-item p { font-size: .88rem; font-weight: 700; color: var(--text-dark); }
+
+    /* ── Loading overlay ── */
+    .ai-loading {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55);
+      z-index: 999; place-items: center;
+    }
+    .ai-loading.show { display: grid; }
+    .ai-loading-box {
+      background: #fff; border-radius: var(--radius-md); padding: 2.5rem 3rem;
+      text-align: center; max-width: 320px;
+    }
+    .ai-spinner {
+      width: 52px; height: 52px; border: 4px solid var(--border);
+      border-top-color: var(--green); border-radius: 50%;
+      animation: spin .75s linear infinite; margin: 0 auto 1.25rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .ai-loading-box h3 { font-size: 1rem; font-weight: 700; color: var(--text-dark); }
+    .ai-loading-box p { font-size: .82rem; color: var(--text-gray); margin-top: .4rem; }
+    .ai-loading-steps { margin-top: 1rem; text-align: left; }
+    .ai-step { font-size: .78rem; color: var(--text-gray); padding: .2rem 0; display: flex; align-items: center; gap: .4rem; }
+    .ai-step.done { color: var(--green); }
+    .ai-step .material-icons { font-size: .95rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="material-icons nav-logo-icon">eco</span>
+        <span class="nav-logo-text">Gram-Bondhon</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="market.html" class="nav-link active">Market AI</a></li>
+      </ul>
+      <div class="nav-auth">
+        <button class="btn-login" onclick="window.location.href='index.html'">Back to Site</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── AI LOADING OVERLAY ── -->
+  <div class="ai-loading" id="aiLoading">
+    <div class="ai-loading-box">
+      <div class="ai-spinner"></div>
+      <h3>Running AI Analysis</h3>
+      <p>Processing market data with ML models…</p>
+      <div class="ai-loading-steps">
+        <div class="ai-step" id="step1"><span class="material-icons">hourglass_empty</span> Fetching price series data</div>
+        <div class="ai-step" id="step2"><span class="material-icons">hourglass_empty</span> Running linear regression</div>
+        <div class="ai-step" id="step3"><span class="material-icons">hourglass_empty</span> Calculating moving averages</div>
+        <div class="ai-step" id="step4"><span class="material-icons">hourglass_empty</span> Generating AI decisions</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="market-main">
+
+    <!-- ── HERO ── -->
+    <div class="market-hero">
+      <div class="container market-hero-inner">
+        <h1>AI-Powered Market Analysis</h1>
+        <p>Real-time crop price forecasting, demand prediction & smart investment signals using Machine Learning</p>
+        <div class="market-hero-chips">
+          <span class="market-chip"><span class="material-icons">psychology</span> Linear Regression ML</span>
+          <span class="market-chip"><span class="material-icons">show_chart</span> Moving Average Signals</span>
+          <span class="market-chip"><span class="material-icons">analytics</span> Seasonality Detection</span>
+          <span class="market-chip"><span class="material-icons">security</span> Risk Assessment</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="market-shell">
+
+      <!-- ── AI STATUS ── -->
+      <div class="ai-banner">
+        <div class="ai-banner-icon"><span class="material-icons">smart_toy</span></div>
+        <div class="ai-banner-text">
+          <h3>ML Engine Active — Bangladesh Agricultural Market</h3>
+          <p>Models: Polynomial Regression · Exponential Moving Average · Seasonal Decomposition · Risk Scoring</p>
+        </div>
+        <div class="ai-pulse"><div class="ai-pulse-dot"></div> Live</div>
+      </div>
+
+      <!-- ── CONTROLS ── -->
+      <div class="market-controls">
+        <label for="cropSelect">Crop / Commodity</label>
+        <select class="market-select" id="cropSelect">
+          <option value="paddy">Paddy (Rice)</option>
+          <option value="poultry">Poultry</option>
+          <option value="fish">Fish (Hilsa)</option>
+          <option value="vegetable">Vegetables</option>
+          <option value="jute">Jute</option>
+        </select>
+        <label for="regionSelect">Region</label>
+        <select class="market-select" id="regionSelect">
+          <option value="mymensingh">Mymensingh</option>
+          <option value="bogra">Bogra</option>
+          <option value="sylhet">Sylhet</option>
+          <option value="rajshahi">Rajshahi</option>
+          <option value="tangail">Tangail</option>
+        </select>
+        <label for="horizonSelect">Forecast Horizon</label>
+        <select class="market-select" id="horizonSelect">
+          <option value="30">30 Days</option>
+          <option value="60">60 Days</option>
+          <option value="90">90 Days</option>
+        </select>
+        <button class="btn-run-ai" id="runAiBtn">
+          <span class="material-icons">play_arrow</span> Run AI Analysis
+        </button>
+      </div>
+
+      <!-- ── STATS ── -->
+      <div class="market-stats">
+        <div class="mstat up">
+          <h4>Current Price</h4>
+          <div class="mstat-val" id="statPrice">৳ 1,840</div>
+          <span class="mstat-badge up"><span class="material-icons">arrow_upward</span><span id="statPriceChg">+4.2%</span></span>
+        </div>
+        <div class="mstat up">
+          <h4>AI Forecast (30d)</h4>
+          <div class="mstat-val" id="statForecast">৳ 1,980</div>
+          <span class="mstat-badge up"><span class="material-icons">trending_up</span><span id="statForecastChg">+7.6%</span></span>
+        </div>
+        <div class="mstat">
+          <h4>Market Demand</h4>
+          <div class="mstat-val" id="statDemand">High</div>
+          <span class="mstat-badge neutral"><span class="material-icons">bar_chart</span> <span id="statDemandPct">82%</span></span>
+        </div>
+        <div class="mstat warn">
+          <h4>Risk Score</h4>
+          <div class="mstat-val" id="statRisk">Low</div>
+          <span class="mstat-badge up" id="statRiskBadge"><span class="material-icons">shield</span> <span id="statRiskVal">18/100</span></span>
+        </div>
+      </div>
+
+      <!-- ── ROW 1: Price Chart + AI Decisions ── -->
+      <div class="market-grid" style="grid-template-columns: 1.6fr 1fr;">
+        <div class="mc">
+          <div class="mc-head">
+            <div>
+              <h2>Price History & AI Forecast</h2>
+              <p>Historical prices + ML regression forecast line</p>
+            </div>
+            <span class="mc-badge"><span class="material-icons">auto_graph</span> ML</span>
+          </div>
+          <div class="chart-wrap-lg">
+            <canvas id="priceChart"></canvas>
+          </div>
+        </div>
+
+        <div class="mc">
+          <div class="mc-head">
+            <div>
+              <h2>AI Investment Signals</h2>
+              <p>Decisions from ML model output</p>
+            </div>
+            <span class="mc-badge"><span class="material-icons">psychology</span> AI</span>
+          </div>
+          <div class="ai-decision-panel" id="aiDecisionPanel">
+            <!-- injected by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ROW 2: Demand + Moving Averages ── -->
+      <div class="market-grid">
+        <div class="mc">
+          <div class="mc-head">
+            <div>
+              <h2>Market Demand by Region</h2>
+              <p>Demand index per district (0–100)</p>
+            </div>
+            <span class="mc-badge"><span class="material-icons">bar_chart</span> Demand</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="demandChart"></canvas>
+          </div>
+        </div>
+
+        <div class="mc">
+          <div class="mc-head">
+            <div>
+              <h2>Moving Average Signals</h2>
+              <p>7-day & 30-day EMA crossover</p>
+            </div>
+            <span class="mc-badge"><span class="material-icons">show_chart</span> EMA</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="maChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ROW 3: Forecast Table + Risk ── -->
+      <div class="market-grid-3">
+        <div class="mc">
+          <div class="mc-head">
+            <div>
+              <h2>Price Forecast Table</h2>
+              <p>Weekly AI-predicted prices with confidence intervals</p>
+            </div>
+            <span class="mc-badge"><span class="material-icons">table_chart</span> Forecast</span>
+          </div>
+          <table class="forecast-table">
+            <thead>
+              <tr>
+                <th>Week</th>
+                <th>Predicted Price (৳)</th>
+                <th>Lower Bound</th>
+                <th>Upper Bound</th>
+                <th>Change</th>
+                <th>Signal</th>
+              </tr>
+            </thead>
+            <tbody id="forecastTableBody">
+              <!-- injected by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mc">
+          <div class="mc-head">
+            <div>
+              <h2>Risk Assessment</h2>
+              <p>ML-computed risk factors</p>
+            </div>
+            <span class="mc-badge"><span class="material-icons">security</span> Risk</span>
+          </div>
+          <div class="risk-items" id="riskItems">
+            <!-- injected by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ROW 4: Seasonality + Model Info ── -->
+      <div class="market-grid">
+        <div class="mc">
+          <div class="mc-head">
+            <div>
+              <h2>Seasonal Pattern Analysis</h2>
+              <p>AI-detected crop price seasonality</p>
+            </div>
+            <span class="mc-badge"><span class="material-icons">calendar_month</span> Season</span>
+          </div>
+          <div class="season-grid" id="seasonGrid">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+        <div class="mc">
+          <div class="mc-head">
+            <div>
+              <h2>ML Model Metrics</h2>
+              <p>Performance of the regression model</p>
+            </div>
+            <span class="mc-badge"><span class="material-icons">model_training</span> Metrics</span>
+          </div>
+          <div class="ml-info" id="mlMetrics">
+            <!-- injected by JS -->
+          </div>
+
+          <div class="chart-wrap" style="height:180px; margin-top:1.25rem;">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /market-shell -->
+  </main>
+
+  <script src="js/market.js"></script>
+</body>
+</html>
