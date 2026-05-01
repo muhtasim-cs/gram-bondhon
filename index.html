@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gram-Bondhon | Empowering Rural Growth Through Ethical Investment</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/fallback.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="material-icons nav-logo-icon">eco</span>
+        <span class="nav-logo-text">Gram-Bondhon</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li>
+          <a href="#marketplace" class="nav-link">
+            Marketplace
+            <span class="material-icons nav-cart">shopping_cart</span>
+          </a>
+        </li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="dashboard.html" class="nav-link" target="_blank" rel="noopener">Dashboard</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+      </ul>
+      <div class="nav-auth">
+        <button class="btn-login" onclick="openModal('loginModal')">Login</button>
+        <button class="btn-signup" onclick="openModal('signupModal')">Sign up</button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <button class="drawer-close" id="drawerClose">&times;</button>
+    <ul class="drawer-links">
+      <li><a href="#hero" class="drawer-link">Home</a></li>
+      <li><a href="#marketplace" class="drawer-link">Marketplace</a></li>
+      <li><a href="#projects" class="drawer-link">Projects</a></li>
+      <li><a href="dashboard.html" class="drawer-link" target="_blank" rel="noopener">Dashboard</a></li>
+      <li><a href="#about" class="drawer-link">About</a></li>
+    </ul>
+    <div class="drawer-auth">
+      <button class="btn-login" onclick="openModal('loginModal');closeDrawer()">Login</button>
+      <button class="btn-signup" onclick="openModal('signupModal');closeDrawer()">Sign up</button>
+    </div>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-slides">
+        <div class="hero-slide active" style="background-image:url('assets/hero1.jpg')"></div>
+        <div class="hero-slide" style="background-image:url('assets/hero2.jpg')"></div>
+        <div class="hero-slide" style="background-image:url('assets/hero3.jpg')"></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Empowering Rural Growth<br>Through Ethical Investment</h1>
+        <p>Connecting global ethical investors with local farmers to build a sustainable,<br>interest-free future for rural communities.</p>
+        <div class="hero-btns">
+          <button class="btn-green" onclick="openModal('signupModal')">Join as Farmer</button>
+          <button class="btn-beige" onclick="openModal('signupModal')">Become an Investor</button>
+        </div>
+      </div>
+      <div class="hero-dots" id="heroDots"></div>
+    </section>
+
+    <!-- ============ HALAL INVESTMENT SECTION ============ -->
+    <section class="halal-section" id="marketplace">
+      <div class="halal-inner container">
+        <div class="halal-text">
+          <div class="halal-badge">
+            <span class="material-icons">verified_user</span>
+            Shariah Compliant &amp; Transparent
+          </div>
+          <h2>Halal Investment Reimagined</h2>
+          <p>At Gram-Bondhon, we replace traditional interest-based models with a partnership-driven profit-sharing approach. Our investments are backed by real assets—crops, livestock, and artisanal goods—ensuring your wealth grows ethically while directly impacting rural livelihoods.</p>
+          <div class="halal-stats">
+            <div class="halal-stat">
+              <h4>0%</h4>
+              <p>Interest (Riba)</p>
+            </div>
+            <div class="halal-stat">
+              <h4>100%</h4>
+              <p>Asset Backed</p>
+            </div>
+          </div>
+        </div>
+        <div class="halal-img">
+          <img src="assets/farmer-rice.jpg" alt="Farmer planting rice in field" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how-it-works" id="how">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Step-by-Step</span>
+          <h2>How It Works</h2>
+          <p>Our simple process connects investors with rural entrepreneurs for transparent, ethical growth</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <span class="step-num">1</span>
+            <span class="material-icons step-icon">agriculture</span>
+            <h3>Farmers Create Projects</h3>
+            <p>Verified rural entrepreneurs list their detailed agricultural or artisan business plans for the community.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">2</span>
+            <span class="material-icons step-icon">payments</span>
+            <h3>Investors Fund Ventures</h3>
+            <p>Choose from diverse bonds including crops, livestock, or handicrafts, and invest with as little as 5,000 BDT.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">3</span>
+            <span class="material-icons step-icon">school</span>
+            <h3>Training &amp; Support</h3>
+            <p>Admin provides continuous training to farmers and artisans, helping them improve skills and work effectively using their expertise.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">4</span>
+            <span class="material-icons step-icon">manufacturing</span>
+            <h3>Production &amp; Monitoring</h3>
+            <p>With guidance and resources in place, production begins while admin monitors progress and ensures quality standards are maintained.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">5</span>
+            <span class="material-icons step-icon">storefront</span>
+            <h3>Sales &amp; Distribution</h3>
+            <p>Admin collects and sells goods through online platform and local markets. Customers can also purchase directly from the platform.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">6</span>
+            <span class="material-icons step-icon">trending_up</span>
+            <h3>Profit Distribution</h3>
+            <p>Generated profit is distributed fairly between investors as returns, farmers and artisans as income, and the platform for operational support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ACTIVE PROJECTS ============ -->
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <div class="projects-header">
+          <div>
+            <h2>Active Projects</h2>
+            <p>Directly fund sustainable rural ventures with clear profit forecasts.</p>
+          </div>
+          <button class="btn-outline-green">
+            View All Projects
+            <span class="material-icons">arrow_forward</span>
+          </button>
+        </div>
+        <div class="projects-grid">
+
+          <div class="project-card">
+            <div class="project-img-wrap">
+              <img src="assets/paddy.jpg" alt="Paddy Field" />
+              <span class="funded-badge">90% Funded</span>
+            </div>
+            <div class="project-body">
+              <div class="project-location">
+                <span class="material-icons">location_on</span> Mymensingh, BD
+              </div>
+              <h3>Monsoon Paddy Harvest</h3>
+              <p>High-yield organic paddy cultivation utilizing eco-friendly fertilizers and traditional methods.</p>
+              <div class="project-footer">
+                <span class="project-amount">৳ 450,000</span>
+                <button class="btn-invest">Invest Now</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-wrap">
+              <img src="assets/poultry.jpg" alt="Poultry Farm" />
+              <span class="funded-badge">65% Funded</span>
+            </div>
+            <div class="project-body">
+              <div class="project-location">
+                <span class="material-icons">location_on</span> Bogra, BD
+              </div>
+              <h3>Sustainable Poultry</h3>
+              <p>Ethical free-range poultry farming focused on organic feed and community employment.</p>
+              <div class="project-footer">
+                <span class="project-amount">৳ 280,000</span>
+                <button class="btn-invest">Invest Now</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-wrap">
+              <img src="assets/fish.jpg" alt="Fish Hatchery" />
+              <span class="funded-badge">42% Funded</span>
+            </div>
+            <div class="project-body">
+              <div class="project-location">
+                <span class="material-icons">location_on</span> Sylhet, BD
+              </div>
+              <h3>Sylhet Bio-Fish Hatchery</h3>
+              <p>Innovative bio-floc technology for high-density, sustainable freshwater fish production.</p>
+              <div class="project-footer">
+                <span class="project-amount">৳ 850,000</span>
+                <button class="btn-invest">Invest Now</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-wrap">
+              <img src="assets/nakshi.jpg" alt="Nakshi Kantha" />
+              <span class="funded-badge">78% Funded</span>
+            </div>
+            <div class="project-body">
+              <div class="project-location">
+                <span class="material-icons">location_on</span> Rajshahi, BD
+              </div>
+              <h3>Nakshi Kantha Collective</h3>
+              <p>Traditional hand-stitched quilts made by 25 rural women artisans preserving centuries-old heritage.</p>
+              <div class="project-footer">
+                <span class="project-amount">৳ 180,000</span>
+                <button class="btn-invest">Invest Now</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-wrap">
+              <img src="assets/basket.jpg" alt="Artisan Woven Basket" />
+              <span class="funded-badge">55% Funded</span>
+            </div>
+            <div class="project-body">
+              <div class="project-location">
+                <span class="material-icons">location_on</span> Tangail, BD
+              </div>
+              <h3>Jhuri Beti Bag Workshop</h3>
+              <p>Eco-friendly woven bags from natural fibers, supporting 40 women artisans with sustainable income.</p>
+              <div class="project-footer">
+                <span class="project-amount">৳ 220,000</span>
+                <button class="btn-invest">Invest Now</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="testimonials-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Testimonials</span>
+          <h2>What Our Community Says</h2>
+          <p>Real stories from investors and farmers building prosperity together</p>
+        </div>
+        <div class="testimonials-grid">
+
+          <div class="testimonial-card">
+            <div class="stars">
+              <span class="material-icons">star</span><span class="material-icons">star</span>
+              <span class="material-icons">star</span><span class="material-icons">star</span>
+              <span class="material-icons">star</span>
+            </div>
+            <p class="testimonial-quote">"Gram-Bondhon has transformed how I invest. Knowing my money directly helps farmers in Sylhet buy modern equipment is far more rewarding than traditional banking."</p>
+            <div class="testimonial-author">
+              <img src="assets/avatar1.jpg" alt="Anwar Hossain" />
+              <div>
+                <p class="author-name">Anwar Hossain</p>
+                <p class="author-role">Tech Entrepreneur, Dhaka</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">
+              <span class="material-icons">star</span><span class="material-icons">star</span>
+              <span class="material-icons">star</span><span class="material-icons">star</span>
+              <span class="material-icons">star</span>
+            </div>
+            <p class="testimonial-quote">"The transparency is unmatched. Monthly updates with photos of the projects I've funded reconnect me with my rural roots. This is ethical investing done right."</p>
+            <div class="testimonial-author">
+              <img src="assets/avatar2.jpg" alt="Farah Jahan" />
+              <div>
+                <p class="author-name">Farah Jahan</p>
+                <p class="author-role">Financial Analyst, Chittagong</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">
+              <span class="material-icons">star</span><span class="material-icons">star</span>
+              <span class="material-icons">star</span><span class="material-icons">star</span>
+              <span class="material-icons">star</span>
+            </div>
+            <p class="testimonial-quote">"Being part of the artisan collective has grown our village's income by 40%. Direct funding cut out middlemen who took our profits. This is true empowerment."</p>
+            <div class="testimonial-author">
+              <img src="assets/avatar3.jpg" alt="Rabeya Begum" />
+              <div>
+                <p class="author-name">Rabeya Begum</p>
+                <p class="author-role">Artisan Leader, Rajshahi</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about-section" id="about">
+      <div class="about-inner container">
+        <div class="about-img">
+          <img src="assets/about-img.jpg" alt="About Gram-Bondhon" />
+        </div>
+        <div class="about-text">
+          <h2>About Gram-Bondhon</h2>
+          <p class="about-subtitle">Building bridges between urban prosperity and rural potential through ethical, transparent, and impactful investment solutions</p>
+          <div class="about-cards">
+            <div class="about-card">
+              <span class="material-icons about-card-icon">groups</span>
+              <div>
+                <h3>Who We Are</h3>
+                <p>We are a fintech platform dedicated to connecting ethical investors with rural entrepreneurs across Bangladesh, ensuring sustainable growth through Shariah-compliant, asset-backed investments.</p>
+              </div>
+            </div>
+            <div class="about-card">
+              <span class="material-icons about-card-icon">handshake</span>
+              <div>
+                <h3>Our Partners</h3>
+                <p>Collaborating with leading NGOs, microfinance institutions, and rural cooperatives to verify projects and ensure transparency, accountability, and maximum community impact.</p>
+              </div>
+            </div>
+            <div class="about-card">
+              <span class="material-icons about-card-icon">work</span>
+              <div>
+                <h3>Join Our Team</h3>
+                <p>We're looking for passionate individuals who believe in ethical finance and rural empowerment. Help us build a more equitable Bangladesh.</p>
+                <button class="btn-outline-green btn-sm">View Openings</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="material-icons" style="color:#4ade80">eco</span>
+          Gram-Bondhon
+        </div>
+        <p>Empowering rural Bangladesh through ethical, asset-backed investment opportunities and sustainable trade.</p>
+        <div class="footer-socials">
+          <span class="material-icons footer-social-icon">language</span>
+          <span class="material-icons footer-social-icon">mail</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platforms</h4>
+        <ul>
+          <li><a href="#">Marketplace</a></li>
+          <li><a href="dashboard.html" target="_blank" rel="noopener">Investment Dashboard</a></li>
+          <li><a href="#">Impact Reports</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Shariah Compliance</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Investor FAQ</a></li>
+          <li><a href="#">Contact Support</a></li>
+          <li><a href="#">Farmer Onboarding</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Gram-Bondhon. Ethical Fintech for Rural Prosperity.</p>
+    </div>
+  </footer>
+
+  <!-- Floating Chat Button -->
+  <button class="chat-btn" title="Chat with our Support">
+    <span class="material-icons">chat</span>
+    <span class="chat-label">Chat with our Support</span>
+  </button>
+
+  <!-- ============ LOGIN MODAL ============ -->
+  <div class="modal-backdrop" id="loginModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+      <div class="modal-logo">
+        <span class="material-icons" style="color:#2d7860;font-size:2rem">eco</span>
+        <span>Gram-Bondhon</span>
+      </div>
+      <h2 class="modal-title">Welcome back</h2>
+      <p class="modal-sub">Sign in to your account</p>
+      <form class="modal-form" onsubmit="return false">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <div class="form-row">
+          <label class="checkbox-label">
+            <input type="checkbox" /> Remember me
+          </label>
+          <a href="#" class="form-link">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn-form-primary">Sign In</button>
+      </form>
+      <p class="modal-footer-text">
+        Don't have an account?
+        <a href="#" onclick="switchModal('loginModal','signupModal')">Sign up</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ============ SIGNUP MODAL ============ -->
+  <div class="modal-backdrop" id="signupModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('signupModal')">&times;</button>
+      <div class="modal-logo">
+        <span class="material-icons" style="color:#2d7860;font-size:2rem">eco</span>
+        <span>Gram-Bondhon</span>
+      </div>
+      <h2 class="modal-title">Create account</h2>
+      <p class="modal-sub">Join our ethical investment community</p>
+      <div class="role-toggle">
+        <button class="role-btn active" id="roleInvestor" onclick="setRole('investor')">Investor</button>
+        <button class="role-btn" id="roleFarmer" onclick="setRole('farmer')">Farmer / Artisan</button>
+      </div>
+      <form class="modal-form" onsubmit="return false">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your full name" autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="••••••••" autocomplete="new-password" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+880 ..." autocomplete="tel" />
+        </div>
+        <button type="submit" class="btn-form-primary">Create Account</button>
+      </form>
+      <p class="modal-footer-text">
+        Already have an account?
+        <a href="#" onclick="switchModal('signupModal','loginModal')">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

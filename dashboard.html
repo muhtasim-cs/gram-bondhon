@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investor Dashboard | Gram-Bondhon</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="material-icons nav-logo-icon">eco</span>
+        <span class="nav-logo-text">Gram-Bondhon</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+      </ul>
+      <div class="nav-auth">
+        <button class="btn-login" onclick="window.location.href='index.html'">Back to Site</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="dashboard-main">
+    <div class="dash-bg" aria-hidden="true">
+      <div class="dash-orb orb-1"></div>
+      <div class="dash-orb orb-2"></div>
+      <div class="dash-orb orb-3"></div>
+      <div class="dash-gridlines"></div>
+      <img class="dash-reference" src="assets/hero2.jpg" alt="" data-provided="assets/investor-dashboard-ref.jpg" />
+      <img class="dash-watermark wm-1" src="assets/nakshi.jpg" alt="" data-provided="assets/nakshi-provided-1.jpg" />
+      <img class="dash-watermark wm-2" src="assets/about-img.jpg" alt="" data-provided="assets/nakshi-provided-2.jpg" />
+    </div>
+
+    <div class="dash-shell">
+      <div class="dash-head">
+        <div>
+          <span class="dash-chip"><span class="material-icons" style="font-size:1rem">monitoring</span> Investor View</span>
+          <h1>Project Tracking & Dashboard</h1>
+          <p>Monitor project progress and review latest field updates and reports.</p>
+        </div>
+        <div class="dash-head-actions">
+          <button class="dash-icon-btn" aria-label="Notifications">
+            <span class="material-icons">notifications</span>
+          </button>
+          <div class="dash-date-pill">
+            <span class="material-icons">event</span>
+            <span id="dashToday">Today</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-floating left" aria-hidden="true">
+        <span class="material-icons">show_chart</span>
+        <p>Live ROI Trend</p>
+      </div>
+      <div class="dash-floating right" aria-hidden="true">
+        <span class="material-icons">insights</span>
+        <p>Rural Impact Index</p>
+      </div>
+
+      <section class="dash-stats" aria-label="Summary metrics">
+        <article class="dash-stat">
+          <h3>Total Invested</h3>
+          <strong>৳ 1,980,000</strong>
+        </article>
+        <article class="dash-stat">
+          <h3>Active Projects</h3>
+          <strong>5</strong>
+        </article>
+        <article class="dash-stat">
+          <h3>Avg. Completion</h3>
+          <strong id="avgCompletion">66%</strong>
+        </article>
+        <article class="dash-stat">
+          <h3>Reports This Month</h3>
+          <strong>12</strong>
+        </article>
+      </section>
+
+      <section class="dash-grid">
+        <article class="dash-card">
+          <div class="dash-card-head">
+            <h2>Project Progress</h2>
+            <select class="dash-filter" id="statusFilter" aria-label="Filter projects by status">
+              <option value="all">All Projects</option>
+              <option value="on-track">On Track</option>
+              <option value="watch">Needs Attention</option>
+            </select>
+          </div>
+          <div class="track-list" id="trackList">
+            <div class="track-item" data-status="on-track" data-progress="90">
+              <div class="track-top">
+                <h3>Monsoon Paddy Harvest</h3>
+                <span class="track-badge on-track">On Track</span>
+              </div>
+              <div class="track-meta">
+                <span>Mymensingh, BD</span>
+                <span>90% Complete</span>
+              </div>
+              <div class="track-bar-wrap"><div class="track-bar"></div></div>
+            </div>
+
+            <div class="track-item" data-status="on-track" data-progress="65">
+              <div class="track-top">
+                <h3>Sustainable Poultry</h3>
+                <span class="track-badge on-track">On Track</span>
+              </div>
+              <div class="track-meta">
+                <span>Bogra, BD</span>
+                <span>65% Complete</span>
+              </div>
+              <div class="track-bar-wrap"><div class="track-bar"></div></div>
+            </div>
+
+            <div class="track-item" data-status="watch" data-progress="42">
+              <div class="track-top">
+                <h3>Sylhet Bio-Fish Hatchery</h3>
+                <span class="track-badge watch">Needs Attention</span>
+              </div>
+              <div class="track-meta">
+                <span>Sylhet, BD</span>
+                <span>42% Complete</span>
+              </div>
+              <div class="track-bar-wrap"><div class="track-bar"></div></div>
+            </div>
+
+            <div class="track-item" data-status="on-track" data-progress="78">
+              <div class="track-top">
+                <h3>Nakshi Kantha Collective</h3>
+                <span class="track-badge on-track">On Track</span>
+              </div>
+              <div class="track-meta">
+                <span>Rajshahi, BD</span>
+                <span>78% Complete</span>
+              </div>
+              <div class="track-bar-wrap"><div class="track-bar"></div></div>
+            </div>
+
+            <div class="track-item" data-status="watch" data-progress="55">
+              <div class="track-top">
+                <h3>Jhuri Beti Bag Workshop</h3>
+                <span class="track-badge watch">Needs Attention</span>
+              </div>
+              <div class="track-meta">
+                <span>Tangail, BD</span>
+                <span>55% Complete</span>
+              </div>
+              <div class="track-bar-wrap"><div class="track-bar"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="dash-card">
+          <div class="dash-card-head">
+            <h2>Updates / Reports</h2>
+          </div>
+
+          <section class="gnns-map-card" aria-label="Project GNNS map">
+            <div class="gnns-map-head">
+              <h3>Project GNNS Map</h3>
+              <span>Geo Tracking</span>
+            </div>
+            <div class="gnns-map" id="gnnsMap" role="region" aria-label="Bangladesh project map"></div>
+            <p class="gnns-map-meta" id="mapDistrictLabel">Active district: Mymensingh</p>
+          </section>
+
+          <div class="updates-list">
+            <div class="update-item">
+              <h4>Field inspection completed in Bogra poultry cluster</h4>
+              <p>2 hours ago • Quality score improved to 8.7/10.</p>
+            </div>
+            <div class="update-item">
+              <h4>Monsoon paddy reached early harvest window</h4>
+              <p>Yesterday • Forecast revised upward by 6%.</p>
+            </div>
+            <div class="update-item">
+              <h4>Fish hatchery requested oxygen system repair budget</h4>
+              <p>2 days ago • Under admin review.</p>
+            </div>
+          </div>
+
+          <table class="report-table" aria-label="Latest investor reports">
+            <thead>
+              <tr>
+                <th>Report</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>April Impact Snapshot</td>
+                <td>Apr 29, 2026</td>
+                <td><a href="#" aria-label="Download April Impact Snapshot">Download</a></td>
+              </tr>
+              <tr>
+                <td>Q1 Financial Summary</td>
+                <td>Apr 05, 2026</td>
+                <td><a href="#" aria-label="Download Q1 Financial Summary">Download</a></td>
+              </tr>
+              <tr>
+                <td>Shariah Compliance Review</td>
+                <td>Mar 30, 2026</td>
+                <td><a href="#" aria-label="Download Shariah Compliance Review">Download</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <a class="dash-back" href="index.html">
+            <span class="material-icons" style="font-size:1rem">arrow_back</span>
+            Back to Main Website
+          </a>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

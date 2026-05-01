@@ -1,0 +1,25 @@
+/* ============================================================
+   GRAM-BONDHON — IMAGE FALLBACK STYLES
+   Applied when real images are missing — shows coloured placeholders
+   ============================================================ */
+
+/* Hero slides fallback */
+.hero-slide:nth-child(1) { background-color: #3d6b52; background-image:
+  linear-gradient(rgba(0,0,0,.25) 0%, rgba(0,0,0,.1) 100%),
+  url('assets/hero1.jpg'); }
+.hero-slide:nth-child(2) { background-image:
+  linear-gradient(rgba(0,0,0,.25) 0%, rgba(0,0,0,.1) 100%),
+  url('assets/hero2.jpg'); background-color: #2d4a38; }
+.hero-slide:nth-child(3) { background-image:
+  linear-gradient(rgba(0,0,0,.25) 0%, rgba(0,0,0,.1) 100%),
+  url('assets/hero3.jpg'); background-color: #4a6040; }
+
+/* Project / testimonial image fallbacks */
+img[src*="paddy"] { background: #c8d8a0; }
+img[src*="poultry"] { background: #e8c8a0; }
+img[src*="fish"] { background: #a0c8d8; }
+img[src*="nakshi"] { background: #e8a0c0; }
+img[src*="basket"] { background: #c8b880; }
+img[src*="avatar"] { background: #d0c0b0; }
+img[src*="farmer-rice"] { background: #c0d4a0; }
+img[src*="about-img"] { background: #b8d0c0; }
