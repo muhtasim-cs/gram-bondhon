@@ -167,6 +167,56 @@ function destroyChart(inst) {
   return null;
 }
 
+(function initMarketNav() {
+  const navbar = document.getElementById('navbar');
+  const drawer = document.getElementById('mobileDrawer');
+  const overlay = document.getElementById('drawerOverlay');
+  const hamburger = document.getElementById('hamburger');
+  const drawerClose = document.getElementById('drawerClose');
+
+  if (navbar) {
+    const onScroll = () => {
+      if (window.scrollY > 60) {
+        navbar.style.background = 'rgba(200, 221, 216, 0.97)';
+        navbar.style.boxShadow = '0 2px 12px rgba(0,0,0,.12)';
+      } else {
+        navbar.style.background = '#c8ddd8';
+        navbar.style.boxShadow = 'none';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  if (!drawer || !overlay || !hamburger || !drawerClose) return;
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    overlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  document.querySelectorAll('.drawer-link').forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  window.closeDrawer = closeDrawer;
+})();
+
 // ── Main render function ─────────────────────────────────────────
 function runAnalysis() {
   const cropKey = document.getElementById('cropSelect').value;

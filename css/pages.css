@@ -630,3 +630,80 @@
     opacity: .08;
   }
 }
+
+/* ============================================================
+   MARKET PAGE RESPONSIVE ENHANCEMENTS
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .market-shell {
+    padding: 1.5rem 1rem 0;
+  }
+
+  .market-hero {
+    padding: 2.25rem 0 2rem;
+  }
+
+  .market-hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .market-controls {
+    align-items: stretch;
+    gap: .7rem;
+  }
+
+  .market-controls label {
+    width: 100%;
+  }
+
+  .market-select {
+    width: 100%;
+  }
+
+  .btn-run-ai {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .market-grid,
+  .market-grid-3 {
+    gap: 1rem;
+  }
+
+  .mc {
+    padding: 1rem;
+  }
+
+  .mc-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+  }
+
+  .chart-wrap {
+    height: 220px;
+  }
+
+  .chart-wrap-lg {
+    height: 250px;
+  }
+
+  .forecast-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .ml-info {
+    grid-template-columns: 1fr;
+  }
+
+  .season-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

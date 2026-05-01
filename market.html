@@ -263,12 +263,30 @@
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
         <li><a href="market.html" class="nav-link active">Market AI</a></li>
+        <li><a href="women.html" class="nav-link">Women</a></li>
       </ul>
       <div class="nav-auth">
         <button class="btn-login" onclick="window.location.href='index.html'">Back to Site</button>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <ul class="drawer-links">
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="dashboard.html" class="drawer-link">Dashboard</a></li>
+      <li><a href="market.html" class="drawer-link">Market AI</a></li>
+      <li><a href="women.html" class="drawer-link">Women Empowerment</a></li>
+    </ul>
+    <div class="drawer-auth">
+      <button class="btn-login" onclick="window.location.href='index.html';closeDrawer()">Back to Site</button>
+    </div>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
 
   <!-- ── AI LOADING OVERLAY ── -->
   <div class="ai-loading" id="aiLoading">
@@ -502,5 +520,6 @@
   </main>
 
   <script src="js/market.js"></script>
+  <script src="js/chatbot.js"></script>
 </body>
 </html>

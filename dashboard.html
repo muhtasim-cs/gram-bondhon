@@ -21,12 +21,30 @@
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
         <li><a href="market.html" class="nav-link">Market AI</a></li>
+        <li><a href="women.html" class="nav-link">Women</a></li>
       </ul>
       <div class="nav-auth">
         <button class="btn-login" onclick="window.location.href='index.html'">Back to Site</button>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <ul class="drawer-links">
+      <li><a href="index.html" class="drawer-link">Home</a></li>
+      <li><a href="dashboard.html" class="drawer-link">Dashboard</a></li>
+      <li><a href="market.html" class="drawer-link">Market AI</a></li>
+      <li><a href="women.html" class="drawer-link">Women Empowerment</a></li>
+    </ul>
+    <div class="drawer-auth">
+      <button class="btn-login" onclick="window.location.href='index.html';closeDrawer()">Back to Site</button>
+    </div>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
 
   <main class="dashboard-main">
     <div class="dash-bg" aria-hidden="true">
@@ -225,5 +243,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="js/dashboard.js"></script>
+  <script src="js/chatbot.js"></script>
 </body>
 </html>
