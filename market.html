@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#2d7860" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="GramBondhon" />
   <title>AI Market Analysis | Gram-Bondhon</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icon.svg" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/pages.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/mobile.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <style>
     /* ── Market Analysis Page Styles ── */
@@ -251,6 +258,53 @@
   </style>
 </head>
 <body>
+
+  <!-- ============ MOBILE HEADER ============ -->
+  <header class="mobile-header" id="mobileHeader">
+    <div class="mobile-header-top">
+      <div class="mobile-header-logo">
+        <span class="material-icons">eco</span>
+        <span>Gram-Bondhon</span>
+      </div>
+      <div class="mobile-header-actions">
+        <button class="mobile-header-btn btn-signup-pill" onclick="window.location='index.html'">Home</button>
+      </div>
+    </div>
+    <div class="mobile-search-row">
+      <div class="mobile-search-wrap">
+        <span class="material-icons mobile-search-icon">search</span>
+        <input type="search" class="mobile-search-input" id="mobileSearchInput"
+          placeholder="Search market data, regions…"
+          autocomplete="off" autocorrect="off" spellcheck="false" />
+        <button class="mobile-search-clear" id="mobileSearchClear" aria-label="Clear search">✕</button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-search-results" id="mobileSearchResults" role="listbox" aria-label="Search results"></div>
+
+  <!-- ============ BOTTOM TAB BAR ============ -->
+  <nav class="bottom-tab-bar" aria-label="App navigation">
+    <a href="index.html" class="tab-item" aria-label="Home">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </a>
+    <a href="market.html" class="tab-item" aria-label="Market">
+      <span class="material-icons">storefront</span>
+      <span>Market</span>
+    </a>
+    <a href="dashboard.html" class="tab-item" aria-label="Invest">
+      <span class="material-icons">trending_up</span>
+      <span>Invest</span>
+    </a>
+    <a href="women.html" class="tab-item" aria-label="Women">
+      <span class="material-icons">volunteer_activism</span>
+      <span>Women</span>
+    </a>
+    <a href="index.html" class="tab-item" aria-label="Profile">
+      <span class="material-icons">account_circle</span>
+      <span>Profile</span>
+    </a>
+  </nav>
 
   <!-- ── NAVBAR ── -->
   <nav class="navbar" id="navbar">
@@ -521,5 +575,20 @@
 
   <script src="js/market.js"></script>
   <script src="js/chatbot.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+    }
+    (function () {
+      const tabs = document.querySelectorAll('.tab-item');
+      const page = location.pathname.split('/').pop() || 'index.html';
+      tabs.forEach(tab => {
+        const href = tab.getAttribute('href') || '';
+        const match = href.split('/').pop();
+        tab.classList.toggle('active', match === page);
+      });
+    })();
+  </script>
 </body>
 </html>

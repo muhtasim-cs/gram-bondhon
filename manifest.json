@@ -1,0 +1,44 @@
+{
+  "name": "Gram-Bondhon",
+  "short_name": "GramBondhon",
+  "description": "Empowering Rural Growth Through Ethical Investment",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#2d7860",
+  "theme_color": "#2d7860",
+  "categories": ["finance", "social"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/hero1.jpg",
+      "sizes": "393x852",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Marketplace",
+      "short_name": "Market",
+      "description": "Browse investment projects",
+      "url": "/market.html",
+      "icons": [{ "src": "assets/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Women Empowerment",
+      "short_name": "Women",
+      "description": "Women empowerment dashboard",
+      "url": "/women.html",
+      "icons": [{ "src": "assets/icon.svg", "sizes": "any" }]
+    }
+  ]
+}

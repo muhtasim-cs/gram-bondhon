@@ -1,0 +1,777 @@
+/* ============================================================
+   GRAM-BONDHON — IPHONE 16 MOBILE APP CSS
+   Target: 393 × 852 pt (iPhone 16 logical pixels)
+   Safe areas for Dynamic Island + home indicator
+   ============================================================ */
+
+/* ---- Reset & Root ---- */
+:root {
+  --safe-top:    env(safe-area-inset-top,    48px);
+  --safe-bottom: env(safe-area-inset-bottom, 34px);
+  --safe-left:   env(safe-area-inset-left,   0px);
+  --safe-right:  env(safe-area-inset-right,  0px);
+  --bottom-nav-h: 72px;
+  --header-h:    104px;
+  --green:       #2d7860;
+  --green-dark:  #1a5c47;
+  --green-light: #e8f4f0;
+  --beige:       #e8dcc8;
+  --text-dark:   #111827;
+  --text-mid:    #374151;
+  --text-gray:   #6b7280;
+  --white:       #ffffff;
+  --border:      #e5e7eb;
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   20px;
+  --radius-xl:   32px;
+  --shadow-sm:   0 1px 4px rgba(0,0,0,.08);
+  --shadow-md:   0 4px 18px rgba(0,0,0,.11);
+  --shadow-lg:   0 8px 32px rgba(0,0,0,.14);
+}
+
+/* ---- Base ---- */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, 'Inter', 'Segoe UI', sans-serif;
+  background: #f5f7f6;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  /* Push content below bottom nav */
+  padding-bottom: calc(var(--bottom-nav-h) + var(--safe-bottom));
+}
+
+.container {
+  padding: 0 1rem;
+  max-width: 100%;
+}
+
+/* ============================================================
+   TOP HEADER (replaces navbar)
+   ============================================================ */
+
+/* Hide the original desktop navbar entirely */
+.navbar { display: none !important; }
+
+/* Mobile app header */
+.mobile-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: calc(var(--header-h) + var(--safe-top));
+  padding-top: var(--safe-top);
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: calc(1rem + var(--safe-left));
+  padding-right: calc(1rem + var(--safe-right));
+  box-shadow: 0 1px 6px rgba(0,0,0,.07);
+  gap: .55rem;
+}
+
+.mobile-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Search bar row */
+.mobile-search-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: .5rem;
+}
+
+.mobile-search-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-search-icon {
+  position: absolute;
+  left: .75rem;
+  color: var(--text-gray);
+  font-size: 1.1rem;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.mobile-search-input {
+  width: 100%;
+  border: none;
+  background: #f1f5f4;
+  border-radius: 99px;
+  padding: .55rem .9rem .55rem 2.4rem;
+  font-size: .9rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  outline: none;
+  transition: background .18s, box-shadow .18s;
+  -webkit-appearance: none;
+}
+
+.mobile-search-input::placeholder {
+  color: var(--text-gray);
+}
+
+.mobile-search-input:focus {
+  background: #e8f4f0;
+  box-shadow: 0 0 0 2px rgba(45,120,96,.25);
+}
+
+.mobile-search-clear {
+  position: absolute;
+  right: .6rem;
+  background: var(--text-gray);
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  color: #fff;
+  font-size: .7rem;
+  line-height: 1;
+}
+
+.mobile-search-clear.visible { display: flex; }
+
+/* Search results overlay */
+.mobile-search-results {
+  position: fixed;
+  top: calc(var(--header-h) + var(--safe-top));
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 190;
+  max-height: 60svh;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  display: none;
+  flex-direction: column;
+}
+
+.mobile-search-results.visible { display: flex; }
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding: .85rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+  transition: background .15s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-result-item:active,
+.search-result-item:hover { background: var(--green-light); }
+
+.search-result-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: var(--green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--green);
+}
+
+.search-result-icon .material-icons { font-size: 1.2rem; }
+
+.search-result-text { flex: 1; min-width: 0; }
+
+.search-result-title {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-result-sub {
+  font-size: .76rem;
+  color: var(--text-gray);
+  margin-top: 1px;
+}
+
+.search-no-result {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-gray);
+  font-size: .9rem;
+}
+
+.mobile-header-logo {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.mobile-header-logo .material-icons {
+  font-size: 1.5rem;
+  color: var(--green);
+}
+
+.mobile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.mobile-header-btn {
+  background: none;
+  border: none;
+  padding: .5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text-mid);
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .18s;
+}
+
+.mobile-header-btn:active { background: var(--green-light); }
+
+.mobile-header-btn.btn-signup-pill {
+  background: var(--green);
+  color: #fff;
+  border-radius: 99px;
+  padding: .45rem 1rem;
+  font-size: .85rem;
+  font-weight: 600;
+  min-width: unset;
+}
+
+/* ============================================================
+   BOTTOM TAB BAR
+   ============================================================ */
+
+.bottom-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: calc(var(--bottom-nav-h) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  background: #fff;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  box-shadow: 0 -2px 16px rgba(0,0,0,.08);
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .5rem .25rem;
+  color: var(--text-gray);
+  font-size: .68rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-decoration: none;
+  transition: color .18s;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.tab-item .material-icons {
+  font-size: 1.5rem;
+  transition: color .18s, transform .18s;
+}
+
+.tab-item.active {
+  color: var(--green);
+}
+
+.tab-item.active .material-icons {
+  transform: translateY(-2px);
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  width: 28px;
+  height: 3px;
+  background: var(--green);
+  border-radius: 99px;
+}
+
+/* ============================================================
+   MAIN CONTENT — push below fixed header
+   ============================================================ */
+
+main,
+.market-main,
+.women-shell,
+.dashboard-shell {
+  padding-top: calc(var(--header-h) + var(--safe-top)) !important;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+
+.hero {
+  height: calc(100svh - var(--header-h) - var(--safe-top) - var(--bottom-nav-h) - var(--safe-bottom));
+  min-height: 480px;
+  max-height: 720px;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
+}
+
+.hero-content h1 {
+  font-size: 1.85rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: .92rem;
+  line-height: 1.65;
+  margin-bottom: 1.75rem;
+}
+
+.hero-btns {
+  flex-direction: column;
+  align-items: center;
+  gap: .85rem;
+}
+
+.btn-green, .btn-beige {
+  width: 100%;
+  max-width: 300px;
+  padding: .9rem 1.5rem;
+  font-size: .95rem;
+  border-radius: var(--radius-xl);
+  text-align: center;
+}
+
+/* ============================================================
+   SECTIONS — spacing & cards
+   ============================================================ */
+
+.halal-section,
+.how-it-works,
+.projects-section,
+.women-section,
+.testimonials-section,
+.about-section {
+  padding: 2.5rem 0;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 1.55rem;
+}
+
+/* ---- Halal investment ---- */
+.halal-inner {
+  grid-template-columns: 1fr !important;
+  gap: 1.75rem !important;
+}
+
+.halal-img img {
+  height: 220px !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.halal-stats {
+  gap: 1.5rem !important;
+}
+
+.halal-stat h4 {
+  font-size: 1.8rem;
+}
+
+/* ---- How it works ---- */
+.steps-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1rem !important;
+}
+
+.step-card {
+  padding: 1.5rem 1.25rem !important;
+  border-radius: var(--radius-md) !important;
+}
+
+/* ---- Projects ---- */
+.projects-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.25rem !important;
+}
+
+.projects-header {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.project-card {
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.project-card:hover {
+  transform: none !important;
+}
+
+.project-img-wrap img {
+  height: 180px !important;
+}
+
+/* ---- Women empowerment ---- */
+.women-inner {
+  grid-template-columns: 1fr !important;
+  gap: 1.75rem !important;
+}
+
+.women-img-main {
+  height: 240px !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.women-img-thumb {
+  width: 100px !important;
+  height: 75px !important;
+  right: 8px !important;
+  bottom: -10px !important;
+}
+
+.women-text-col h2 {
+  font-size: 1.55rem !important;
+}
+
+.women-stats-row {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+/* ---- Testimonials ---- */
+.testimonials-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.25rem !important;
+}
+
+.testimonial-card {
+  border-radius: var(--radius-md) !important;
+}
+
+/* ---- About ---- */
+.about-inner {
+  grid-template-columns: 1fr !important;
+  gap: 1.75rem !important;
+}
+
+.about-img img {
+  height: 220px !important;
+  border-radius: var(--radius-md) !important;
+}
+
+/* ============================================================
+   FOOTER — compact mobile version
+   ============================================================ */
+
+.footer-inner {
+  grid-template-columns: 1fr !important;
+  gap: 1.75rem !important;
+}
+
+.footer {
+  padding-top: 2.5rem;
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+}
+
+/* ============================================================
+   MOBILE DRAWER — hide (replaced by bottom tab)
+   ============================================================ */
+
+.mobile-drawer,
+.drawer-overlay,
+.hamburger {
+  display: none !important;
+}
+
+/* ============================================================
+   CHATBOT — move above bottom nav
+   ============================================================ */
+
+#gbChatRoot {
+  bottom: calc(var(--bottom-nav-h) + var(--safe-bottom) + .75rem) !important;
+  right: 1rem !important;
+}
+
+.gb-chat-window {
+  width: calc(100vw - 2rem) !important;
+  right: 0 !important;
+  bottom: 74px !important;
+  max-height: calc(100svh - var(--header-h) - var(--safe-top) - var(--bottom-nav-h) - var(--safe-bottom) - 5rem) !important;
+}
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+
+.modal-backdrop {
+  padding: 0 !important;
+  align-items: flex-end !important;
+}
+
+.modal {
+  max-width: 100% !important;
+  width: 100% !important;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+  max-height: 92svh !important;
+  padding: 1.75rem 1.5rem calc(1.5rem + var(--safe-bottom)) !important;
+}
+
+/* Sheet drag handle */
+.modal::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 99px;
+  margin: 0 auto 1.25rem;
+}
+
+/* ============================================================
+   TOUCH-FRIENDLY BUTTONS
+   ============================================================ */
+
+button,
+a[role="button"],
+.btn-invest,
+.btn-green,
+.btn-beige,
+.btn-outline-green,
+.btn-form-primary {
+  min-height: 44px;
+}
+
+/* ============================================================
+   APP PAGE TRANSITIONS
+   ============================================================ */
+
+@keyframes pageSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+section {
+  animation: pageSlideUp .4s ease both;
+}
+
+/* ============================================================
+   SCROLL SNAP — horizontal cards (projects)
+   ============================================================ */
+
+@media (max-width: 430px) {
+  /* Horizontal scroll card strip for projects */
+  .projects-scroll-strip {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: .5rem 1rem 1rem;
+    margin: 0 -1rem;
+  }
+
+  .projects-scroll-strip::-webkit-scrollbar { display: none; }
+
+  .projects-scroll-strip .project-card {
+    min-width: 280px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+/* ============================================================
+   STATUS BAR THEME (Safari iOS)
+   ============================================================ */
+
+/* handled via <meta name="apple-mobile-web-app-status-bar-style"> */
+
+/* ============================================================
+   IPHONE 16 — 393px viewport fine-tuning
+   ============================================================ */
+
+@media (max-width: 430px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero-content {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .halal-section,
+  .how-it-works,
+  .projects-section,
+  .women-section,
+  .testimonials-section,
+  .about-section {
+    padding: 2rem 0;
+  }
+
+  .btn-green, .btn-beige {
+    font-size: .9rem;
+    padding: .85rem 1.25rem;
+  }
+
+  .projects-header h2 {
+    font-size: 1.35rem;
+  }
+
+  .footer-inner {
+    padding: 0 1rem;
+  }
+}
+
+/* ============================================================
+   HORIZONTAL SCROLL CHIP FILTER (projects / market)
+   ============================================================ */
+
+.category-chips {
+  display: flex;
+  gap: .6rem;
+  overflow-x: auto;
+  padding: .75rem 1rem;
+  margin: 0 -1rem;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.category-chips::-webkit-scrollbar { display: none; }
+
+.category-chip {
+  flex-shrink: 0;
+  padding: .45rem 1rem;
+  border-radius: 99px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text-mid);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .18s, color .18s, border-color .18s;
+  scroll-snap-align: start;
+  font-family: inherit;
+}
+
+.category-chip.active,
+.category-chip:active {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+/* ============================================================
+   PULL-TO-REFRESH hint (cosmetic)
+   ============================================================ */
+
+.ptr-hint {
+  text-align: center;
+  padding: .5rem;
+  font-size: .75rem;
+  color: var(--text-gray);
+  display: none;
+}
+
+/* ============================================================
+   APP SPLASH SCREEN (first load)
+   ============================================================ */
+
+#app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--green);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: opacity .5s ease, visibility .5s ease;
+}
+
+#app-splash.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#app-splash .splash-icon {
+  font-size: 3.5rem;
+  color: #fff;
+}
+
+#app-splash .splash-name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.5px;
+}
+
+#app-splash .splash-tagline {
+  font-size: .85rem;
+  color: rgba(255,255,255,.75);
+  text-align: center;
+  padding: 0 2rem;
+}
+
+#app-splash .splash-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .75s linear infinite;
+  margin-top: .5rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
