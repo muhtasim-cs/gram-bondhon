@@ -582,7 +582,7 @@ main,
    TOUCH-FRIENDLY BUTTONS
    ============================================================ */
 
-button,
+button:not(.hero-dot),
 a[role="button"],
 .btn-invest,
 .btn-green,
@@ -775,3 +775,222 @@ section {
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   DESKTOP OVERRIDES — undo all mobile-only rules on wide screens
+   ============================================================ */
+
+@media (min-width: 901px) {
+
+  /* ---- Body & container ---- */
+  body {
+    background: #ffffff !important;
+    padding-bottom: 0 !important;
+  }
+
+  .container {
+    max-width: 1200px !important;
+    padding: 0 2rem !important;
+  }
+
+  /* ---- Navigation ---- */
+  .navbar { display: flex !important; }
+
+  .mobile-header,
+  .mobile-search-results,
+  .bottom-tab-bar { display: none !important; }
+
+  /* ---- Main content — remove mobile header offset ---- */
+  main                { padding-top: 0 !important; }
+  .dashboard-main     { padding-top: 2rem !important; }
+  .market-main        { padding-top: 0 !important; }
+  .women-shell        { padding-top: 2.5rem !important; }
+
+  /* ---- Section padding (override mobile.css global reduction) ---- */
+  .halal-section,
+  .projects-section,
+  .women-section,
+  .testimonials-section,
+  .about-section { padding: 6rem 0 !important; }
+
+  .how-it-works { padding: 6rem 0 !important; }
+
+  /* ---- Section header ---- */
+  .section-header { margin-bottom: 4rem !important; }
+  .section-header h2 { font-size: clamp(1.7rem, 3vw, 2.4rem) !important; }
+
+  /* ---- Hero ---- */
+  .hero {
+    height: 100vh !important;
+    min-height: 600px !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .hero-content p {
+    font-size: clamp(1rem, 2vw, 1.2rem) !important;
+    line-height: 1.7 !important;
+    margin-bottom: 2.5rem !important;
+  }
+
+  .hero-btns {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 1.25rem !important;
+  }
+
+  .btn-green,
+  .btn-beige {
+    width: auto !important;
+    max-width: none !important;
+    padding: .9rem 2.2rem !important;
+    font-size: 1rem !important;
+    border-radius: var(--radius-xl) !important;
+    text-align: left !important;
+  }
+
+  /* ---- Halal section ---- */
+  .halal-inner {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5rem !important;
+  }
+
+  .halal-img img {
+    height: 420px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  .halal-stats { gap: 3rem !important; }
+
+  .halal-stat h4 { font-size: 2.2rem !important; }
+
+  /* ---- How it works ---- */
+  .steps-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem !important;
+  }
+
+  .step-card {
+    padding: 2rem 1.75rem !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .step-card:hover {
+    transform: translateY(-4px) !important;
+  }
+
+  /* ---- Projects ---- */
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.75rem !important;
+  }
+
+  .projects-header {
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    margin-bottom: 3rem !important;
+  }
+
+  .project-card { border-radius: var(--radius-md) !important; }
+
+  .project-card:hover {
+    transform: translateY(-6px) !important;
+  }
+
+  .project-img-wrap img { height: 200px !important; }
+
+  /* ---- Women section (homepage) ---- */
+  .women-inner {
+    grid-template-columns: 1fr 1.2fr !important;
+    gap: 60px !important;
+  }
+
+  .women-img-main {
+    height: 420px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  .women-img-thumb {
+    width: 160px !important;
+    height: 120px !important;
+    right: -20px !important;
+    bottom: -20px !important;
+  }
+
+  .women-text-col h2 { font-size: 2.2rem !important; }
+
+  .women-stats-row {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  /* ---- Testimonials ---- */
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.75rem !important;
+  }
+
+  .testimonial-card { border-radius: var(--radius-md) !important; }
+
+  /* ---- About ---- */
+  .about-inner {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5rem !important;
+  }
+
+  .about-img img {
+    height: auto !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  /* ---- Footer ---- */
+  .footer-inner {
+    grid-template-columns: 2fr 1fr 1fr 1fr !important;
+    gap: 3rem !important;
+  }
+
+  /* ---- Modals ---- */
+  .modal-backdrop {
+    padding: 1rem !important;
+    align-items: center !important;
+  }
+
+  .modal {
+    max-width: 500px !important;
+    width: 90% !important;
+    border-radius: var(--radius-lg) !important;
+    max-height: 90vh !important;
+    padding: 2.5rem !important;
+  }
+
+  .modal::before { display: none !important; }
+
+  /* ---- Chatbot ---- */
+  #gbChatRoot {
+    bottom: 2rem !important;
+    right: 2rem !important;
+  }
+
+  .gb-chat-window {
+    width: 380px !important;
+    right: 0 !important;
+    bottom: 60px !important;
+    max-height: 520px !important;
+  }
+
+  /* ---- Page entry animation (unnecessary on desktop) ---- */
+  section { animation: none !important; }
+
+  /* ---- Hero dots — must never be stretched by touch rules ---- */
+  .hero-dot {
+    min-height: unset !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+  }
+}
